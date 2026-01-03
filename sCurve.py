@@ -124,6 +124,7 @@ def business_days_integration(dataframe): #function to integrate business day to
     print("Finalizing the dataframe...")
 
     # creating a new column where instead of boolean business days values, it will be 1s and 0s
+    dataframe = dataframe.copy()
     dataframe['Is a Business Day_int'] = dataframe['Is a Business Day'].astype(int)
     # Creating a new 'Average Accomplishment' columns where the accomplishment is only counted on business days(if business days is = 1)
     dataframe['Average_Accomplishment_Business_Days'] = dataframe['Average_Accomplishment'] * dataframe['Is a Business Day_int']
@@ -136,6 +137,28 @@ def business_days_integration(dataframe): #function to integrate business day to
     print("Dataframe finalization completed.")
     print("Showing the first 20 rows of the final dataframe:")
     print(dataframe.head(20))
+
+    return dataframe
+
+
+def output_generator(dataframe): #function to generate outout. This should be modified to write ti the actual database
+
+    print(section_separator)
+    print("Generating output...")
+
+
+    #exporting df_assembled dataframe to a csv file
+    dataframe.to_csv('Output/assembled_data.csv', index=False)
+
+    #exporting df_assembled to a json file
+    dataframe.to_json('Output/assembled_data.json', orient='records', date_format='iso')
+
+    #exporting df_assembled to ndjson file
+    dataframe.to_json('Output/assembled_data.ndjson', orient='records', date_format='iso', lines=True)
+
+    print("Output generation completed.")
+    print(section_separator)
+    print(section_separator)
 
 
 
@@ -155,6 +178,9 @@ def __main__():
 
     #calling business days integration function
     df_final = business_days_integration(dataframe=df_assembled)
+
+    #calling the output generator function
+    output_generator(dataframe=df_final)
 
 if __name__ == "__main__":
     __main__()
