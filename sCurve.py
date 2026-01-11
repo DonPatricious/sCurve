@@ -4,6 +4,8 @@ import numpy as np
 #this constant is the project planned cost. This is an actual from the database
 project_cost = 1000
 section_separator = "----------------------------------------"
+holidays = ['2026-01-01', '2026-02-25', '2026-04-09', '2026-05-01', '2026-06-12', '2026-08-31', '2026-11-30', '2026-12-25'] #in actual implementation, this should come from a data source 
+weekdays_active = "Mon Tue Wed Thu Fri Sat" #workdays including Saturdays #in actual implementation, this should come from a data source
 
 # "print" statements are for verbose logging purposes. A logging framework can be used instead.
 
@@ -21,7 +23,7 @@ def data_ingestion(file_path): #function to read from a data source(tenant and p
 
     return df_planned
 
-def calculate_activity_weight(dataframe): #function to calculate activity weight
+def calculate_activity_weight(dataframe, busDays): #function to calculate activity weight
 
     print(section_separator)
     print("Calculating activity weights...")
@@ -33,7 +35,18 @@ def calculate_activity_weight(dataframe): #function to calculate activity weight
     print("Adding duration in days...")
     #adding durations in days
     #adding holidays and weekends will affect this computation
-    dataframe['Duration_Days'] = (dataframe['End_date'] - dataframe['Start_date']).dt.days + 1
+    start_d = dataframe["Start_date"].dt.normalize().to_numpy(dtype="datetime64[D]")
+    end_d   = dataframe["End_date"].dt.normalize().to_numpy(dtype="datetime64[D]")
+
+    dataframe["Duration_Days"] = np.busday_count(
+        start_d,
+        end_d + np.timedelta64(1, 'D'),  # add 1 day to include the end date
+        busdaycal=busDays   # optional custom calendar
+    )
+
+    print("Sample processed data:")
+    print(dataframe.head())
+
 
     print("Computing average daily accomplishment...")
     #computing the average accomplishment per day
@@ -43,9 +56,11 @@ def calculate_activity_weight(dataframe): #function to calculate activity weight
     print("Modifiying the dataframe...")
     #creating a shorter dataframe
     df_processed = dataframe[['SubTaskID','SubTasks','Start_date','End_date','Average_Accomplishement_per_Day']]
-    print("Mondification completed.")
+    print("Modification completed.")
 
     print("Activity weight calculation completed.")
+    print("Sample processed data:")
+    print(df_processed.head())
 
     return df_processed
 
@@ -76,19 +91,17 @@ def dataframe_assembly(dataframe): #function to assemble the initial dataframe
 
     return df_assembled
 
-def bussiness_calendar(): #tenant and project specific calendar
+def bussiness_calendar(holidays, weekdays_active): #tenant and project specific calendar
 
     print(section_separator)
     print("Setting up business calendar...")
-    holidays = ['2026-01-01', '2026-02-25', '2026-04-09', '2026-05-01', '2026-06-12', '2026-08-31', '2026-11-30', '2026-12-25'] #in actual implementation, this should come from a data source 
-    weekdays_active = "Mon Tue Wed Thu Fri Sat" #workdays including Saturdays #in actual implementation, this should come from a data source
 
     busDays = np.busdaycalendar(weekmask=weekdays_active, holidays=holidays)
 
     print("Business calendar setup completed.")
     return busDays
 
-def business_days_integration(dataframe): #function to integrate business day to the dataframe
+def business_days_integration(dataframe, busDays): #function to integrate business day to the dataframe
 
     print(section_separator)
     print("Integrating business days into the dataframe...")
@@ -98,9 +111,6 @@ def business_days_integration(dataframe): #function to integrate business day to
     dates_np_array = dataframe['Dates'].values.astype('datetime64[D]')
 
     #creating the is business day array
-    #calling business_calendar function to generate the business calendar
-    busDays = bussiness_calendar()
-
     busDayArray = np.is_busday(dates_np_array, busdaycal=busDays)
 
     #integrating the business day array into the dataframe
@@ -170,14 +180,17 @@ def __main__():
     # calling data ingestion function. Storing the output dataframe to a variable
     df_planned = data_ingestion(file_path=file_path)
 
+    # calculating the business calendar. 
+    busDays = bussiness_calendar(holidays=holidays, weekdays_active=weekdays_active)
+
     # calling activity weight calculation function. Storing the output dataframe to a variable
-    df_processed = calculate_activity_weight(dataframe=df_planned)
+    df_processed = calculate_activity_weight(dataframe=df_planned, busDays=busDays)
 
     #calling dataframe assembly function and storing the output dataframe to a variable
     df_assembled = dataframe_assembly(dataframe=df_processed)
 
     #calling business days integration function
-    df_final = business_days_integration(dataframe=df_assembled)
+    df_final = business_days_integration(dataframe=df_assembled, busDays=busDays)
 
     #calling the output generator function
     output_generator(dataframe=df_final)
