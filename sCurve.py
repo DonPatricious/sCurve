@@ -4,8 +4,13 @@ import numpy as np
 #this constant is the project planned cost. This is an actual from the database
 project_cost = 1000
 section_separator = "----------------------------------------"
+
+#constants. Data should be from a location like a config file, input or database
 holidays = ['2026-01-01', '2026-02-25', '2026-04-09', '2026-05-01', '2026-06-12', '2026-08-31', '2026-11-30', '2026-12-25'] #in actual implementation, this should come from a data source 
 weekdays_active = "Mon Tue Wed Thu Fri Sat" #workdays including Saturdays #in actual implementation, this should come from a data source
+start = '2026-01-01' #time series start date range for the chart generation
+end = '2026-01-31' #time series end date range for the chart generation
+
 
 # "print" statements are for verbose logging purposes. A logging framework can be used instead.
 
@@ -141,8 +146,8 @@ def business_days_integration(dataframe, busDays): #function to integrate busine
     #dropping columns 'Average_Accomplishment' and 'Is a Business Day_int' as they are no longer needed
     dataframe = dataframe.drop(columns=['Average_Accomplishment', 'Is a Business Day_int'])
     
-    #replacing zero values on column 'Average_Accomplishments_Business_Days' with NaN for better visualization in the s-curve graph
-    dataframe['Average_Accomplishment_Business_Days'] = dataframe['Average_Accomplishment_Business_Days'].replace(0, np.nan)
+    #perfoming  aggreagation on Dates column
+    dataframe = dataframe.groupby('Dates')['Average_Accomplishment_Business_Days'].sum().reset_index()
 
     print("Dataframe finalization completed.")
     print("Showing the first 20 rows of the final dataframe:")
@@ -150,6 +155,29 @@ def business_days_integration(dataframe, busDays): #function to integrate busine
 
     return dataframe
 
+def chart_generator(dataframe, start, end): #function to generate charts.
+
+    print(section_separator)
+    print("Generating chart dataframe...")
+
+
+    #generating date range for the x-axis
+    date_range = pd.date_range(start=start, end=end, freq='D')
+    df_daterange = pd.DataFrame({"Dates": date_range})
+    #merging the date range with the final dataframe to ensure all dates are represented
+    df_chart = pd.merge(df_daterange, dataframe, on='Dates', how='left')
+
+    #fille missing values with 0
+    df_chart["Average_Accomplishment_Business_Days"] = df_chart["Average_Accomplishment_Business_Days"].fillna(0)
+
+    #crerating the cumulative accomplishment column
+    df_chart["Cumulative_Accomplishment"] = df_chart["Average_Accomplishment_Business_Days"].cumsum()
+
+    print("Chart dataframe generation completed.")
+    print("Showing the first 20 rows of the chart dataframe:")
+    print(df_chart.head(20))
+
+    return df_chart
 
 def output_generator(dataframe): #function to generate outout. This should be modified to write ti the actual database
 
@@ -192,8 +220,11 @@ def __main__():
     #calling business days integration function
     df_final = business_days_integration(dataframe=df_assembled, busDays=busDays)
 
+    #calling chart generator function
+    df_chart = chart_generator(dataframe=df_final, start=start, end=end)
+
     #calling the output generator function
-    output_generator(dataframe=df_final)
+    output_generator(dataframe=df_chart)
 
 if __name__ == "__main__":
     __main__()

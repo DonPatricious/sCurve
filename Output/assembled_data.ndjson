@@ -1,16 +1,31 @@
-{"Dates":"2026-01-03T00:00:00.000","Is a Business Day":true,"SubTaskID":1,"SubTasks":"Activity 1","Average_Accomplishment_Business_Days":0.125}
-{"Dates":"2026-01-04T00:00:00.000","Is a Business Day":false,"SubTaskID":1,"SubTasks":"Activity 1","Average_Accomplishment_Business_Days":null}
-{"Dates":"2026-01-05T00:00:00.000","Is a Business Day":true,"SubTaskID":1,"SubTasks":"Activity 1","Average_Accomplishment_Business_Days":0.125}
-{"Dates":"2026-01-06T00:00:00.000","Is a Business Day":true,"SubTaskID":1,"SubTasks":"Activity 1","Average_Accomplishment_Business_Days":0.125}
-{"Dates":"2026-01-07T00:00:00.000","Is a Business Day":true,"SubTaskID":1,"SubTasks":"Activity 1","Average_Accomplishment_Business_Days":0.125}
-{"Dates":"2026-01-08T00:00:00.000","Is a Business Day":true,"SubTaskID":2,"SubTasks":"Activity 2","Average_Accomplishment_Business_Days":0.075}
-{"Dates":"2026-01-09T00:00:00.000","Is a Business Day":true,"SubTaskID":2,"SubTasks":"Activity 2","Average_Accomplishment_Business_Days":0.075}
-{"Dates":"2026-01-10T00:00:00.000","Is a Business Day":true,"SubTaskID":3,"SubTasks":"Activity 3","Average_Accomplishment_Business_Days":0.125}
-{"Dates":"2026-01-11T00:00:00.000","Is a Business Day":false,"SubTaskID":3,"SubTasks":"Activity 3","Average_Accomplishment_Business_Days":null}
-{"Dates":"2026-01-12T00:00:00.000","Is a Business Day":true,"SubTaskID":3,"SubTasks":"Activity 3","Average_Accomplishment_Business_Days":0.125}
-{"Dates":"2026-01-11T00:00:00.000","Is a Business Day":false,"SubTaskID":4,"SubTasks":"Activity 4","Average_Accomplishment_Business_Days":null}
-{"Dates":"2026-01-12T00:00:00.000","Is a Business Day":true,"SubTaskID":4,"SubTasks":"Activity 4","Average_Accomplishment_Business_Days":0.02}
-{"Dates":"2026-01-13T00:00:00.000","Is a Business Day":true,"SubTaskID":4,"SubTasks":"Activity 4","Average_Accomplishment_Business_Days":0.02}
-{"Dates":"2026-01-14T00:00:00.000","Is a Business Day":true,"SubTaskID":4,"SubTasks":"Activity 4","Average_Accomplishment_Business_Days":0.02}
-{"Dates":"2026-01-15T00:00:00.000","Is a Business Day":true,"SubTaskID":4,"SubTasks":"Activity 4","Average_Accomplishment_Business_Days":0.02}
-{"Dates":"2026-01-16T00:00:00.000","Is a Business Day":true,"SubTaskID":4,"SubTasks":"Activity 4","Average_Accomplishment_Business_Days":0.02}
+{"Dates":"2026-01-01T00:00:00.000","Average_Accomplishment_Business_Days":0.0,"Cumulative_Accomplishment":0.0}
+{"Dates":"2026-01-02T00:00:00.000","Average_Accomplishment_Business_Days":0.0,"Cumulative_Accomplishment":0.0}
+{"Dates":"2026-01-03T00:00:00.000","Average_Accomplishment_Business_Days":0.125,"Cumulative_Accomplishment":0.125}
+{"Dates":"2026-01-04T00:00:00.000","Average_Accomplishment_Business_Days":0.0,"Cumulative_Accomplishment":0.125}
+{"Dates":"2026-01-05T00:00:00.000","Average_Accomplishment_Business_Days":0.125,"Cumulative_Accomplishment":0.25}
+{"Dates":"2026-01-06T00:00:00.000","Average_Accomplishment_Business_Days":0.125,"Cumulative_Accomplishment":0.375}
+{"Dates":"2026-01-07T00:00:00.000","Average_Accomplishment_Business_Days":0.125,"Cumulative_Accomplishment":0.5}
+{"Dates":"2026-01-08T00:00:00.000","Average_Accomplishment_Business_Days":0.075,"Cumulative_Accomplishment":0.575}
+{"Dates":"2026-01-09T00:00:00.000","Average_Accomplishment_Business_Days":0.075,"Cumulative_Accomplishment":0.65}
+{"Dates":"2026-01-10T00:00:00.000","Average_Accomplishment_Business_Days":0.125,"Cumulative_Accomplishment":0.775}
+{"Dates":"2026-01-11T00:00:00.000","Average_Accomplishment_Business_Days":0.0,"Cumulative_Accomplishment":0.775}
+{"Dates":"2026-01-12T00:00:00.000","Average_Accomplishment_Business_Days":0.145,"Cumulative_Accomplishment":0.92}
+{"Dates":"2026-01-13T00:00:00.000","Average_Accomplishment_Business_Days":0.02,"Cumulative_Accomplishment":0.94}
+{"Dates":"2026-01-14T00:00:00.000","Average_Accomplishment_Business_Days":0.02,"Cumulative_Accomplishment":0.96}
+{"Dates":"2026-01-15T00:00:00.000","Average_Accomplishment_Business_Days":0.02,"Cumulative_Accomplishment":0.98}
+{"Dates":"2026-01-16T00:00:00.000","Average_Accomplishment_Business_Days":0.02,"Cumulative_Accomplishment":1.0}
+{"Dates":"2026-01-17T00:00:00.000","Average_Accomplishment_Business_Days":0.0,"Cumulative_Accomplishment":1.0}
+{"Dates":"2026-01-18T00:00:00.000","Average_Accomplishment_Business_Days":0.0,"Cumulative_Accomplishment":1.0}
+{"Dates":"2026-01-19T00:00:00.000","Average_Accomplishment_Business_Days":0.0,"Cumulative_Accomplishment":1.0}
+{"Dates":"2026-01-20T00:00:00.000","Average_Accomplishment_Business_Days":0.0,"Cumulative_Accomplishment":1.0}
+{"Dates":"2026-01-21T00:00:00.000","Average_Accomplishment_Business_Days":0.0,"Cumulative_Accomplishment":1.0}
+{"Dates":"2026-01-22T00:00:00.000","Average_Accomplishment_Business_Days":0.0,"Cumulative_Accomplishment":1.0}
+{"Dates":"2026-01-23T00:00:00.000","Average_Accomplishment_Business_Days":0.0,"Cumulative_Accomplishment":1.0}
+{"Dates":"2026-01-24T00:00:00.000","Average_Accomplishment_Business_Days":0.0,"Cumulative_Accomplishment":1.0}
+{"Dates":"2026-01-25T00:00:00.000","Average_Accomplishment_Business_Days":0.0,"Cumulative_Accomplishment":1.0}
+{"Dates":"2026-01-26T00:00:00.000","Average_Accomplishment_Business_Days":0.0,"Cumulative_Accomplishment":1.0}
+{"Dates":"2026-01-27T00:00:00.000","Average_Accomplishment_Business_Days":0.0,"Cumulative_Accomplishment":1.0}
+{"Dates":"2026-01-28T00:00:00.000","Average_Accomplishment_Business_Days":0.0,"Cumulative_Accomplishment":1.0}
+{"Dates":"2026-01-29T00:00:00.000","Average_Accomplishment_Business_Days":0.0,"Cumulative_Accomplishment":1.0}
+{"Dates":"2026-01-30T00:00:00.000","Average_Accomplishment_Business_Days":0.0,"Cumulative_Accomplishment":1.0}
+{"Dates":"2026-01-31T00:00:00.000","Average_Accomplishment_Business_Days":0.0,"Cumulative_Accomplishment":1.0}
